@@ -1,0 +1,7 @@
+mode: set
+github.com/cr00z/ping/ping.go:16.39,18.16 2 1
+github.com/cr00z/ping/ping.go:21.2,21.28 1 1
+github.com/cr00z/ping/ping.go:24.2,24.13 1 1
+github.com/cr00z/ping/ping.go:18.16,20.3 1 0
+github.com/cr00z/ping/ping.go:21.28,23.3 1 1
+github.com/cr00z/ping/ping.go:27.13,33.2 5 0

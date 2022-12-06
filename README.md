@@ -77,6 +77,21 @@ Summary [README](goTodoList/README.md):
 Telegram bot example
 
 
+## Contests & Cources
+
+### codewars
+
+Решенные задачи
+
+### route256
+
+Задания с контеста route256
+
+### stepik_golang
+
+Решенные задания
+
+
 ## TODO
 
 - mailGoCoursera
