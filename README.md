@@ -1,5 +1,5 @@
 # goExamples
-Various golang microprojects (web, REST, gRPC, tests, etc.)
+Various golang microprojects and exercises (web, REST, gRPC, tests, etc.)
 
 
 ## REST
@@ -34,3 +34,7 @@ Summary:
 ### goTelegram
 
 Telegram bot example
+
+## TODO
+
+- upload goNotes
