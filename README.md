@@ -6,7 +6,7 @@ Various golang microprojects and exercises (web, REST, gRPC, tests, etc.)
 
 ### goTasks
 
-    REST microservices examples
+REST microservices examples
 
     1. Simple, no-dep
     2. Gorilla/mux
@@ -29,7 +29,7 @@ Summary [README](goTodoList/README.md):
 
 ### helloworld
 
-    'Helloworld' service, based on protobuf and gRPC
+'Helloworld' service, based on protobuf and gRPC
 
 
 ## Web
@@ -70,13 +70,14 @@ Summary [README](goTodoList/README.md):
 
 ### goTests
 
-    "Learn Go with Tests" examples
+"Learn Go with Tests" examples
 
 ### goTelegram
 
-    Telegram bot example
+Telegram bot example
 
 
 ## TODO
 
-    - upload goNotes
+- mailGoCoursera
+- upload goNotes
