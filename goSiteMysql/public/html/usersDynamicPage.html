@@ -1,0 +1,27 @@
+{{define "users"}}
+<!doctype html>
+<html lang="ru" class="h-100">
+<head>
+    {{template "meta"}}
+    {{template "styles"}}
+    <title>Title</title>
+</head>
+<body class="d-flex flex-column h-100">
+    <table class="table">
+        <th>id</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        {{range .}}
+        <tr>
+            {{if gt .Id 1}}
+            <td>{{.Id}}</td>
+            <td>{{.Name}}</td>
+            <td>{{.Surname}}</td>
+            {{end}}
+        </tr>
+        {{end}}
+    </table>
+    {{template "scripts"}}
+</body>
+</html>
+{{end}}
