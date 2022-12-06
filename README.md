@@ -95,4 +95,10 @@ Telegram bot example
 ## TODO
 
 - mailGoCoursera
+	- https://github.com/tyz910/golang-webservices
 - upload goNotes
+- tinkoff_fintech
+	- https://github.com/tfs-go/lections21
+- 21school_golang_swim
+
+
