@@ -4,6 +4,14 @@ Various golang microprojects and exercises (web, REST, gRPC, tests, etc.)
 
 ## REST
 
+### goTasks
+
+REST microservices examples
+
+1. Simple, no-dep
+2. Gorilla/mux
+3. Gin
+
 ### goTodoList
 
 Summary:
