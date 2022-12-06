@@ -1,5 +1,5 @@
 # goExamples
-Различные микропроекты на golang (web, REST, gRPC, тесты)
+Various golang microprojects (web, REST, gRPC, tests, etc.)
 
 
 ## REST
@@ -20,13 +20,17 @@ Summary:
 
 ## gRPC
 
-###helloworld
+### helloworld
 
 'Helloworld' service, based on protobuf and gRPC
 
 
 ## Разное
 
-###goTests
+### goTests
 
 "Learn Go with Tests" examples
+
+### goTelegram
+
+Telegram bot example
