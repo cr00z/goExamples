@@ -14,7 +14,7 @@ REST microservices examples
 
 ### goTodoList
 
-Summary:
+Summary [README](goTodoList/README.md):
 
 - Router: gin
 - DB: jmoiron/sqlx, postgres, migrations, trnsactions
@@ -24,7 +24,6 @@ Summary:
 - Documentation: Swagger
 - Tests: gomock
 
-[README](goTodoList/README.md)
 
 ## gRPC
 
@@ -35,6 +34,10 @@ Summary:
 
 ## Разное
 
+### goRabbitMQ
+
+RabbitMQ + Fiber [README](goRabbitMQ/README.md)
+
 ### goTests
 
 "Learn Go with Tests" examples
@@ -42,6 +45,7 @@ Summary:
 ### goTelegram
 
 Telegram bot example
+
 
 ## TODO
 
