@@ -83,9 +83,9 @@ Telegram bot example
 
 Решенные задачи
 
-### route256
+### route256, tinkoff, yandex
 
-Задания с контеста route256
+Задания с контестов route256(ozon), tinkoff, yandex
 
 ### stepik_golang
 
