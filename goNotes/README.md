@@ -17,6 +17,10 @@ S3 MinIO
 
 Python 3, Flask, Neo4j (Cypher)
 
+# TagsService
+
+
+
 # APIService
 
 RESTful, Swagger
@@ -32,3 +36,10 @@ REST + PostgreSQL
 # WebApplication
 
 Vue.js / React.js
+
+Эндпоинты:
+
+- аутентификации и регистрации
+- GET /api/categories получение древовидного списка категорий   
+- POST /api/categories создать новую категорию
+- GET /notes?category_id=? список заметок текущей категории
