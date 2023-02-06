@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+//option go_package = "cpu/techschool_pcbook";
+option go_package = ".;pb";
+package techschool_pcbook;
+
+message Keyboard {
+  enum Layout {
+    UNKNOWN = 0;
+    QWERTY = 1;
+    QWERTZ = 2;
+    AZERTY = 3;
+  }
+
+  Layout layout = 1;
+  bool backlit = 2;
+}

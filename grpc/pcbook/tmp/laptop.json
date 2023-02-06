@@ -1,0 +1,62 @@
+{
+ "id": "2e704fdd-ef2b-4002-9954-5b4c91ad6210",
+ "brand": "Lenovo",
+ "name": "Thinkpad P53",
+ "cpu": {
+  "brand": "Intel",
+  "name": "Core i7-9750H",
+  "number_cores": 4,
+  "number_threads": 4,
+  "min_ghz": 1.3455360025314278,
+  "max_ghz": 2.832641526407137
+ },
+ "ram": {
+  "value": "4",
+  "unit": "GIGABYTE"
+ },
+ "gpus": [
+  {
+   "brand": "NVidia",
+   "name": "RTX 2070",
+   "min_ghz": 1.0396920330401858,
+   "max_ghz": 1.427983173074592,
+   "memory": {
+    "value": "1",
+    "unit": "GIGABYTE"
+   }
+  }
+ ],
+ "storages": [
+  {
+   "driver": "SSD",
+   "memory": {
+    "value": "1024",
+    "unit": "GIGABYTE"
+   }
+  },
+  {
+   "driver": "HDD",
+   "memory": {
+    "value": "1",
+    "unit": "TERABYTE"
+   }
+  }
+ ],
+ "screen": {
+  "size_inch": 13.6,
+  "resolution": {
+   "width": 1920,
+   "height": 1080
+  },
+  "panel": "IPS",
+  "multitouch": true
+ },
+ "keyboard": {
+  "layout": "QWERTY",
+  "backlit": true
+ },
+ "weight_kg": 1.7029983367958061,
+ "price_usd": 2875.4,
+ "release_year": 2017,
+ "updated_at": "2023-02-06T11:29:35.477934Z"
+}
