@@ -7,14 +7,24 @@ import (
 )
 
 func main() {
-	var n int
+	var a, b, c, d, e int
 	in := bufio.NewReader(os.Stdin)
-	fmt.Fscan(in, &n)
-	emp := make([]int, n, n)
-	for i := 0; i < n; i++ {
-		fmt.Fscan(in, &emp[i])
+	fmt.Fscan(in, &a, &b, &c, &d, &e)
+	if d > e {
+		d, e = e, d
 	}
-	for i := 0; i < n; i++ {
-		fmt.Println(emp[i])
+	if a > b {
+		a, b = b, a
+	}
+	if b > c {
+		b, c = c, b
+	}
+	if a > b {
+		a, b = b, a
+	}
+	if a <= d && b <= e {
+		fmt.Println("YES")
+	} else {
+		fmt.Println("NO")
 	}
 }

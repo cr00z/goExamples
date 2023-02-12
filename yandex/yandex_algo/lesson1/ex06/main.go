@@ -7,14 +7,29 @@ import (
 )
 
 func main() {
-	var n int
+	var a, b, c, d int
 	in := bufio.NewReader(os.Stdin)
-	fmt.Fscan(in, &n)
-	emp := make([]int, n, n)
-	for i := 0; i < n; i++ {
-		fmt.Fscan(in, &emp[i])
+	fmt.Fscan(in, &a, &b, &c, &d)
+	
+
+
+	if b > a {
+		a, b = b, a
 	}
-	for i := 0; i < n; i++ {
-		fmt.Println(emp[i])
+	if d > c {
+		c, d = d, c
+	}
+	maxAC := a
+	if c > a {
+		maxAC = c
+	}
+	maxBD := b
+	if d > b {
+		maxBD = d
+	}
+	if (a+c)*maxBD < maxAC*(b+d) {
+		fmt.Println(a+c, maxBD)
+	} else {
+		fmt.Println(maxAC, b+d)
 	}
 }
