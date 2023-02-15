@@ -4,6 +4,7 @@ import (
 	"github.com/google/uuid"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"math"
+	"math/rand"
 	"pcbook/pb"
 )
 
@@ -102,4 +103,8 @@ func NewLaptop() *pb.Laptop {
 		ReleaseYear: uint32(year),
 		UpdatedAt:   timestamppb.Now(),
 	}
+}
+
+func RandomLaptopScore() float64 {
+	return float64(1 + rand.Intn(10-1))
 }

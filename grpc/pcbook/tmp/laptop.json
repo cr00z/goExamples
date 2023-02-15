@@ -1,14 +1,14 @@
 {
- "id": "c7510836-176c-4b93-a32a-da6fa3d7b647",
- "brand": "Apple",
- "name": "Macbook Pro",
+ "id": "0357f1fd-702a-400e-93ac-23834c75def8",
+ "brand": "Lenovo",
+ "name": "Thinkpad X1",
  "cpu": {
-  "brand": "Intel",
-  "name": "Core i5-9400F",
-  "number_cores": 8,
-  "number_threads": 16,
-  "min_ghz": 1.2636879103569867,
-  "max_ghz": 3.190502634111664
+  "brand": "AMD",
+  "name": "Ryzen 7 PRO 2700U",
+  "number_cores": 1,
+  "number_threads": 1,
+  "min_ghz": 1.7646282365704717,
+  "max_ghz": 4.564311681992209
  },
  "ram": {
   "value": "64",
@@ -17,9 +17,9 @@
  "gpus": [
   {
    "brand": "NVidia",
-   "name": "GTX 1660-Ti",
-   "min_ghz": 1.1318737301425512,
-   "max_ghz": 1.6073510137176832,
+   "name": "GTX 1070",
+   "min_ghz": 1.3827863097184936,
+   "max_ghz": 1.6473760690774542,
    "memory": {
     "value": "2",
     "unit": "GIGABYTE"
@@ -37,26 +37,26 @@
   {
    "driver": "HDD",
    "memory": {
-    "value": "6",
+    "value": "4",
     "unit": "TERABYTE"
    }
   }
  ],
  "screen": {
-  "size_inch": 14,
+  "size_inch": 15.2,
   "resolution": {
-   "width": 3840,
-   "height": 2160
+   "width": 1024,
+   "height": 576
   },
   "panel": "OLED",
-  "multitouch": true
+  "multitouch": false
  },
  "keyboard": {
   "layout": "QWERTZ",
-  "backlit": false
+  "backlit": true
  },
- "weight_kg": 1.792983792225554,
- "price_usd": 2140.88,
- "release_year": 2016,
- "updated_at": "2023-02-15T06:07:13.377570Z"
+ "weight_kg": 1.1408376198043633,
+ "price_usd": 1760.77,
+ "release_year": 2017,
+ "updated_at": "2023-02-15T08:31:50.809407Z"
 }

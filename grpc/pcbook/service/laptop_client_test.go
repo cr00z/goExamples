@@ -217,3 +217,52 @@ func Test_LaptopClient_UploadImage(t *testing.T) {
 	require.FileExists(t, savedImagePath)
 	require.NoError(t, os.Remove(savedImagePath))
 }
+
+func Test_LaptopClient_RateLaptop(t *testing.T) {
+	t.Parallel()
+
+	laptopStore := NewInMemoryLaptopStore()
+	ratingStore := NewInMemoryRatingStore()
+
+	laptop := sample.NewLaptop()
+	err := laptopStore.Save(laptop)
+	require.NoError(t, err)
+
+	_, serverAddress := startTestLaptopServer(t, laptopStore, nil, ratingStore)
+	laptopClient := newTestLaptopClient(t, serverAddress)
+
+	stream, err := laptopClient.RateLaptop(context.Background())
+	require.NoError(t, err)
+
+	scores := []float64{8, 9, 10}
+	averages := []float64{8, 8.5, 9}
+	nLaptops := len(scores)
+
+	for i := 0; i < nLaptops; i++ {
+		req := &pb.RateLaptopRequest{
+			LaptopId: laptop.GetId(),
+			Score:    scores[i],
+		}
+
+		err = stream.Send(req)
+
+		require.NoError(t, err)
+	}
+
+	err = stream.CloseSend()
+	require.NoError(t, err)
+
+	for i := 0; ; i++ {
+		res, err := stream.Recv()
+
+		if err == io.EOF {
+			require.Equal(t, i, nLaptops)
+			return
+		}
+
+		require.NoError(t, err)
+		require.Equal(t, laptop.GetId(), res.GetLaptopId())
+		require.Equal(t, uint32(i+1), res.GetRatedCount())
+		require.Equal(t, averages[i], res.GetAverageScore())
+	}
+}
