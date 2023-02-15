@@ -1,27 +1,27 @@
 {
- "id": "2e704fdd-ef2b-4002-9954-5b4c91ad6210",
- "brand": "Lenovo",
- "name": "Thinkpad P53",
+ "id": "c7510836-176c-4b93-a32a-da6fa3d7b647",
+ "brand": "Apple",
+ "name": "Macbook Pro",
  "cpu": {
   "brand": "Intel",
-  "name": "Core i7-9750H",
-  "number_cores": 4,
-  "number_threads": 4,
-  "min_ghz": 1.3455360025314278,
-  "max_ghz": 2.832641526407137
+  "name": "Core i5-9400F",
+  "number_cores": 8,
+  "number_threads": 16,
+  "min_ghz": 1.2636879103569867,
+  "max_ghz": 3.190502634111664
  },
  "ram": {
-  "value": "4",
+  "value": "64",
   "unit": "GIGABYTE"
  },
  "gpus": [
   {
    "brand": "NVidia",
-   "name": "RTX 2070",
-   "min_ghz": 1.0396920330401858,
-   "max_ghz": 1.427983173074592,
+   "name": "GTX 1660-Ti",
+   "min_ghz": 1.1318737301425512,
+   "max_ghz": 1.6073510137176832,
    "memory": {
-    "value": "1",
+    "value": "2",
     "unit": "GIGABYTE"
    }
   }
@@ -37,26 +37,26 @@
   {
    "driver": "HDD",
    "memory": {
-    "value": "1",
+    "value": "6",
     "unit": "TERABYTE"
    }
   }
  ],
  "screen": {
-  "size_inch": 13.6,
+  "size_inch": 14,
   "resolution": {
-   "width": 1920,
-   "height": 1080
+   "width": 3840,
+   "height": 2160
   },
-  "panel": "IPS",
+  "panel": "OLED",
   "multitouch": true
  },
  "keyboard": {
-  "layout": "QWERTY",
-  "backlit": true
+  "layout": "QWERTZ",
+  "backlit": false
  },
- "weight_kg": 1.7029983367958061,
- "price_usd": 2875.4,
- "release_year": 2017,
- "updated_at": "2023-02-06T11:29:35.477934Z"
+ "weight_kg": 1.792983792225554,
+ "price_usd": 2140.88,
+ "release_year": 2016,
+ "updated_at": "2023-02-15T06:07:13.377570Z"
 }

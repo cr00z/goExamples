@@ -8,6 +8,8 @@ import (
 	"sync"
 )
 
+const maxImageSize = 1 << 20
+
 type ImageStore interface {
 	Save(laptopID string, imageType string, imageData bytes.Buffer) (string, error)
 }

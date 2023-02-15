@@ -62,7 +62,7 @@ func Test_LaptopServer_CreateLaptop(t *testing.T) {
 			t.Parallel()
 
 			// Act
-			server := NewLaptopServer(tc.store, nil)
+			server := NewLaptopServer(tc.store, nil, nil)
 			response, err := server.CreateLaptop(context.Background(), &pb.CreateLaptopRequest{
 				Laptop: tc.laptop,
 			})
