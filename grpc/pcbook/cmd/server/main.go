@@ -40,14 +40,30 @@ func streamInterceptor(
 	return handler(srv, ss)
 }
 
-func createUser(userStore service.UserStore, username string, password string, role string) {
-	user, _ := service.NewUser(username, password, role)
-	userStore.Save(user)
+func createUser(userStore service.UserStore, username string, password string, role string) error {
+	user, err := service.NewUser(username, password, role)
+	if err != nil {
+		return err
+	}
+	return userStore.Save(user)
 }
 
-func seedUsers(userStore service.UserStore) {
-	createUser(userStore, "admin", "admin", "admin")
-	createUser(userStore, "user", "user", "user")
+func seedUsers(userStore service.UserStore) error {
+	err := createUser(userStore, "admin", "admin", "admin")
+	if err != nil {
+		return err
+	}
+	return createUser(userStore, "user", "user", "user")
+}
+
+func accessibleRoles() map[string][]string {
+	const laptopServicePath = "/techschool_pcbook.LaptopService/"
+
+	return map[string][]string{
+		laptopServicePath + "CreateLaptop": {"admin"},
+		laptopServicePath + "UploadImage":  {"admin"},
+		laptopServicePath + "RateLaptop":   {"admin", "user"},
+	}
 }
 
 func main() {
@@ -57,6 +73,25 @@ func main() {
 	serverAddr := fmt.Sprintf("0.0.0.0:%d", *port)
 	fmt.Printf("start server on %s\n", serverAddr)
 
+	// jwt manager
+
+	jwtManager := service.NewJWTManager(secretKey, tokenDuration)
+	authInterceptor := service.NewAuthInterceptor(jwtManager, accessibleRoles())
+
+	grpcServer := grpc.NewServer(
+		grpc.UnaryInterceptor(authInterceptor.Unary()),
+		grpc.StreamInterceptor(authInterceptor.Stream()),
+	)
+
+	// auth service
+
+	userStore := service.NewInMemoryUserStore()
+	_ = seedUsers(userStore)
+
+	authServer := service.NewAuthServer(userStore, jwtManager)
+
+	pb.RegisterAuthServiceServer(grpcServer, authServer)
+
 	// laptop service
 
 	laptopStore := service.NewInMemoryLaptopStore()
@@ -64,21 +99,8 @@ func main() {
 	ratingStore := service.NewInMemoryRatingStore()
 
 	laptopServer := service.NewLaptopServer(laptopStore, imageStore, ratingStore)
-	grpcServer := grpc.NewServer(
-		grpc.UnaryInterceptor(unaryInterceptor),
-		grpc.StreamInterceptor(streamInterceptor),
-	)
 
 	pb.RegisterLaptopServiceServer(grpcServer, laptopServer)
-
-	// auth service
-
-	userStore := service.NewInMemoryUserStore()
-	jwtManager := service.NewJWTManager(secretKey, tokenDuration)
-
-	authServer := service.NewAuthServer(userStore, jwtManager)
-
-	pb.RegisterAuthServiceServer(grpcServer, authServer)
 
 	// ...
 

@@ -32,7 +32,7 @@ func (s *AuthServer) Login(ctx context.Context, req *pb.LoginRequest) (*pb.Login
 
 	token, err := s.jwtManager.Generate(user)
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "jwt generate error")
+		return nil, status.Errorf(codes.Internal, "jwt generate error: %v", err)
 	}
 
 	res := &pb.LoginResponse{

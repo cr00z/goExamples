@@ -1,27 +1,27 @@
 {
- "id": "0357f1fd-702a-400e-93ac-23834c75def8",
- "brand": "Lenovo",
- "name": "Thinkpad X1",
+ "id": "dfd663d2-f48d-4c75-a479-d9801623287f",
+ "brand": "Dell",
+ "name": "XPS",
  "cpu": {
-  "brand": "AMD",
-  "name": "Ryzen 7 PRO 2700U",
-  "number_cores": 1,
-  "number_threads": 1,
-  "min_ghz": 1.7646282365704717,
-  "max_ghz": 4.564311681992209
+  "brand": "Intel",
+  "name": "Core i3-1005G1",
+  "number_cores": 2,
+  "number_threads": 4,
+  "min_ghz": 1.08637734293394,
+  "max_ghz": 2.72279370656208
  },
  "ram": {
-  "value": "64",
+  "value": "4",
   "unit": "GIGABYTE"
  },
  "gpus": [
   {
    "brand": "NVidia",
-   "name": "GTX 1070",
-   "min_ghz": 1.3827863097184936,
-   "max_ghz": 1.6473760690774542,
+   "name": "RTX 2060",
+   "min_ghz": 1.2068250729130576,
+   "max_ghz": 1.6950534974560445,
    "memory": {
-    "value": "2",
+    "value": "16",
     "unit": "GIGABYTE"
    }
   }
@@ -30,7 +30,7 @@
   {
    "driver": "SSD",
    "memory": {
-    "value": "1024",
+    "value": "128",
     "unit": "GIGABYTE"
    }
   },
@@ -43,7 +43,7 @@
   }
  ],
  "screen": {
-  "size_inch": 15.2,
+  "size_inch": 15.1,
   "resolution": {
    "width": 1024,
    "height": 576
@@ -53,10 +53,10 @@
  },
  "keyboard": {
   "layout": "QWERTZ",
-  "backlit": true
+  "backlit": false
  },
- "weight_kg": 1.1408376198043633,
- "price_usd": 1760.77,
- "release_year": 2017,
- "updated_at": "2023-02-15T08:31:50.809407Z"
+ "weight_kg": 2.1113444101102297,
+ "price_usd": 1714.42,
+ "release_year": 2018,
+ "updated_at": "2023-02-16T11:04:58.033663Z"
 }

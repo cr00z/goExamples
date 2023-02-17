@@ -12,7 +12,10 @@ type JWTManager struct {
 }
 
 func NewJWTManager(secretKey string, tokenDuration time.Duration) *JWTManager {
-	return &JWTManager{secretKey: secretKey}
+	return &JWTManager{
+		secretKey:     secretKey,
+		tokenDuration: tokenDuration,
+	}
 }
 
 type UserClaims struct {
@@ -32,7 +35,7 @@ func (m *JWTManager) Generate(user *User) (string, error) {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	return token.SignedString(m.secretKey)
+	return token.SignedString([]byte(m.secretKey))
 }
 
 func (m *JWTManager) Verify(tokenString string) (*UserClaims, error) {
