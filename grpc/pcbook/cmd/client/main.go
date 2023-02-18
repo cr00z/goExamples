@@ -1,11 +1,14 @@
 package main
 
 import (
+	"crypto/tls"
+	"crypto/x509"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/credentials"
 	"log"
+	"os"
 	"pcbook/client"
 	"pcbook/pb"
 	"pcbook/sample"
@@ -18,6 +21,30 @@ const (
 	username             = "admin"
 	password             = "admin"
 )
+
+func loadTLSCredentials() (credentials.TransportCredentials, error) {
+	pemServerCA, err := os.ReadFile("cert/ca-cert.pem")
+	if err != nil {
+		return nil, err
+	}
+
+	certPool := x509.NewCertPool()
+	if !certPool.AppendCertsFromPEM(pemServerCA) {
+		return nil, fmt.Errorf("failed to add server CA's certificate")
+	}
+
+	clientCert, err := tls.LoadX509KeyPair("cert/client-cert.pem", "cert/client-key.pem")
+	if err != nil {
+		return nil, err
+	}
+
+	config := &tls.Config{
+		Certificates: []tls.Certificate{clientCert},
+		RootCAs:      certPool,
+	}
+
+	return credentials.NewTLS(config), nil
+}
 
 func authMethods() map[string]bool {
 	const laptopServicePath = "/techschool_pcbook.LaptopService/"
@@ -87,12 +114,18 @@ func testRateLaptop(laptopClient *client.LaptopClient) {
 }
 
 func main() {
-	address := flag.String("a", "127.0.0.1:8080", "server address")
+	address := flag.String("a", "0.0.0.0:8080", "server address")
 	flag.Parse()
+
+	tlsCredentials, err := loadTLSCredentials()
+	if err != nil {
+		log.Fatal("cannot load TLS credentials: ", err)
+	}
 
 	authConn, err := grpc.Dial(
 		*address,
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		// grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithTransportCredentials(tlsCredentials),
 	)
 	if err != nil {
 		log.Fatalf("cannot connect to auth server: %v", err)
@@ -106,7 +139,8 @@ func main() {
 
 	laptopConn, err := grpc.Dial(
 		*address,
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		// grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithTransportCredentials(tlsCredentials),
 		grpc.WithUnaryInterceptor(interceptor.Unary()),
 		grpc.WithStreamInterceptor(interceptor.Stream()),
 	)

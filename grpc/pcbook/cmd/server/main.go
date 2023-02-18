@@ -2,12 +2,16 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
+	"os"
 	"pcbook/pb"
 	"pcbook/service"
 	"time"
@@ -17,6 +21,32 @@ const (
 	secretKey     = "12345"
 	tokenDuration = time.Minute * 15
 )
+
+func loadTLSCredentials() (credentials.TransportCredentials, error) {
+	pemClientCA, err := os.ReadFile("cert/ca-cert.pem")
+	if err != nil {
+		return nil, err
+	}
+
+	certPool := x509.NewCertPool()
+	if !certPool.AppendCertsFromPEM(pemClientCA) {
+		return nil, fmt.Errorf("failed to add client CA's sertificate")
+	}
+
+	serverCert, err := tls.LoadX509KeyPair("cert/server-cert.pem", "cert/server-key.pem")
+	if err != nil {
+		return nil, err
+	}
+
+	config := &tls.Config{
+		Certificates: []tls.Certificate{serverCert},
+		// ClientAuth:   tls.NoClientCert,
+		ClientAuth: tls.RequireAndVerifyClientCert,
+		ClientCAs:  certPool,
+	}
+
+	return credentials.NewTLS(config), nil
+}
 
 func unaryInterceptor(
 	ctx context.Context,
@@ -68,20 +98,33 @@ func accessibleRoles() map[string][]string {
 
 func main() {
 	port := flag.Int("port", 8080, "the server port")
+	enableTLS := flag.Bool("tls", false, "enable SSL/TLS")
 	flag.Parse()
 
 	serverAddr := fmt.Sprintf("0.0.0.0:%d", *port)
-	fmt.Printf("start server on %s\n", serverAddr)
+	log.Printf("start server on %s, TLS = %t", serverAddr, *enableTLS)
 
 	// jwt manager
 
 	jwtManager := service.NewJWTManager(secretKey, tokenDuration)
 	authInterceptor := service.NewAuthInterceptor(jwtManager, accessibleRoles())
 
-	grpcServer := grpc.NewServer(
+	serverOptions := []grpc.ServerOption{
 		grpc.UnaryInterceptor(authInterceptor.Unary()),
 		grpc.StreamInterceptor(authInterceptor.Stream()),
-	)
+	}
+
+	// tls
+
+	if *enableTLS {
+		tlsCredentials, err := loadTLSCredentials()
+		if err != nil {
+			log.Fatal("cannot load TLS credentials: ", err)
+		}
+		serverOptions = append(serverOptions, grpc.Creds(tlsCredentials))
+	}
+
+	grpcServer := grpc.NewServer(serverOptions...)
 
 	// auth service
 
