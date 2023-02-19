@@ -12,11 +12,20 @@ clean:
 server:
 	go run cmd/server/main.go -port 8080
 
-servertls:
-	go run cmd/server/main.go -port 8080 -tls=true
+server1:
+	go run cmd/server/main.go -port 50051
+
+server2:
+	go run cmd/server/main.go -port 50052
+
+nginx:
+	cd deploy/nginx; docker compose up -d
+
+ndown:
+	cd deploy/nginx; docker compose down
 
 client:
-	go run cmd/client/main.go
+	go run cmd/client/main.go -address 0.0.0.0:8080
 
 test:
 	go test -cover -race ./...

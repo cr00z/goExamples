@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"os"
 	"pcbook/client"
@@ -114,18 +115,22 @@ func testRateLaptop(laptopClient *client.LaptopClient) {
 }
 
 func main() {
-	address := flag.String("a", "0.0.0.0:8080", "server address")
+	address := flag.String("address", "0.0.0.0:8080", "server address")
+	enableTLS := flag.Bool("tls", false, "enable SSL/TLS")
 	flag.Parse()
 
-	tlsCredentials, err := loadTLSCredentials()
-	if err != nil {
-		log.Fatal("cannot load TLS credentials: ", err)
+	transportOption := grpc.WithTransportCredentials(insecure.NewCredentials())
+	if *enableTLS {
+		tlsCredentials, err := loadTLSCredentials()
+		if err != nil {
+			log.Fatal("cannot load TLS credentials: ", err)
+		}
+		transportOption = grpc.WithTransportCredentials(tlsCredentials)
 	}
 
 	authConn, err := grpc.Dial(
 		*address,
-		// grpc.WithTransportCredentials(insecure.NewCredentials()),
-		grpc.WithTransportCredentials(tlsCredentials),
+		transportOption,
 	)
 	if err != nil {
 		log.Fatalf("cannot connect to auth server: %v", err)
@@ -139,8 +144,7 @@ func main() {
 
 	laptopConn, err := grpc.Dial(
 		*address,
-		// grpc.WithTransportCredentials(insecure.NewCredentials()),
-		grpc.WithTransportCredentials(tlsCredentials),
+		transportOption,
 		grpc.WithUnaryInterceptor(interceptor.Unary()),
 		grpc.WithStreamInterceptor(interceptor.Stream()),
 	)
